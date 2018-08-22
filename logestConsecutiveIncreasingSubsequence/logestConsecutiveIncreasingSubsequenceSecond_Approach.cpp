@@ -6,18 +6,24 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define N 1000000
+
 int logestConsecutiveIncreasingSubsequence(int name[],int n){
     int maximum = 1;
     // sort the array and return maximum length of the substring having difference is 1
-    sort(name,name+n);
-    for(int i =0;i < n;i++){
-        int sum = 1;
-        int j;
-        for(j = i+1;j<n && name[j-1] + 1 == name[j];j++) 
+    int hash[N]={0};
+    for(int i =0 ;i<n;i++){
+        hash[name[i]]++;
+    }
+    int sum = 1;
+    for(int i =1;i<N;i++){
+        if(hash[i] == hash[i-1]  && hash[i-1] == 1){
             sum++;
-        i = j-1;
-        maximum = max(maximum,sum);
-
+        }
+        else{
+            maximum = max(maximum,sum);
+            sum = 1;
+        }
     }
     return maximum;
 }
@@ -30,4 +36,4 @@ int main(){
     cout<<endl;
 }
 
-// time comlexity o(NlogN)
+// time comlexity o(N)
