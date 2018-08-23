@@ -36,4 +36,4 @@ int main(){
     cout<<endl;
 }
 
-// time comlexity o(NlogN)
+// time comlexity o(N)
