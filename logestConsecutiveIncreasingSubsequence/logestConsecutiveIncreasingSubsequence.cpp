@@ -7,19 +7,17 @@
 using namespace std;
 
 int logestConsecutiveIncreasingSubsequence(int name[],int n){
-    int ans[n];
-    for(int i=0; i < n;i ++) ans[i] = 1;
-    for(int i = 0; i<n;i++){
-        for(int j=0;j<i;j++){
-            if(name[j]+1 == name[i] || name[j]-1 == name[i])
-                ans[i] = max(ans[i], ans[j]+1);
-        }
-    }
-    for(int i =0 ;i<n;i++) cout<<ans[i]<<" ";
-    cout<<endl;
-    int maximum = 0;
-    for(int i =0;i<n;i++){
-        maximum = max(ans[i],maximum);
+    int maximum = 1;
+    // sort the array and return maximum length of the substring having difference is 1
+    sort(name,name+n);
+    for(int i =0;i < n;i++){
+        int sum = 1;
+        int j;
+        for(j = i+1;j<n && name[j-1] + 1 == name[j];j++) 
+            sum++;
+        i = j-1;
+        maximum = max(maximum,sum);
+
     }
     return maximum;
 }
